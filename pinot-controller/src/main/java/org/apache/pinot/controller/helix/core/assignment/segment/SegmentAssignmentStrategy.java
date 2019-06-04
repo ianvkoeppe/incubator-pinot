@@ -33,12 +33,18 @@ public interface SegmentAssignmentStrategy {
 
   /**
    * Initializes the segment assignment strategy.
+   *
+   * @param propertyStore Helix property store
+   * @param tableConfig Table config
    */
   void init(ZkHelixPropertyStore<ZNRecord> propertyStore, TableConfig tableConfig);
 
   /**
    * Assigns a new segment.
    *
+   * @param segmentName Name of the segment to be assigned
+   * @param currentAssignment Current segment assignment of the table (map from segment name to instance state map)
+   * @param instancePartitions Instance partitions of the table
    * @return List of servers to assign the segment to
    */
   List<String> assignSegment(String segmentName, Map<String, Map<String, String>> currentAssignment,
@@ -47,6 +53,8 @@ public interface SegmentAssignmentStrategy {
   /**
    * Rebalances the segments for a table.
    *
+   * @param currentAssignment Current segment assignment of the table (map from segment name to instance state map)
+   * @param instancePartitions Instance partitions of the table
    * @return the rebalanced assignment for the segments
    */
   Map<String, Map<String, String>> rebalanceTable(Map<String, Map<String, String>> currentAssignment,

@@ -33,11 +33,15 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * Segment assignment strategy for LLC real-time segments.
+ * Segment assignment strategy for LLC real-time segments (both consuming and completed).
  * <p>It is very similar to replica-group based segment assignment with the following differences:
  * <ul>
- *   <li>1. Each partition always contains one server</li>
- *   <li>2. In addition to the ONLINE segments, there are also CONSUMING segments to be assigned</li>
+ *   <li>1. Inside one replica, each partition (stream partition) always contains one server</li>
+ *   <li>
+ *     2. Partition id for an instance is derived from the index of the instance in the replica group, instead of
+ *     explicitly stored in the instance partitions
+ *   </li>
+ *   <li>3. In addition to the ONLINE segments, there are also CONSUMING segments to be assigned</li>
  * </ul>
  * <p>
  *   Since each partition contains only one server (in one replica), we can directly assign or rebalance segments to the

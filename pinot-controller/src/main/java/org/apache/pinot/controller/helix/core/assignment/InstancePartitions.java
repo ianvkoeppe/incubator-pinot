@@ -28,8 +28,9 @@ import org.apache.helix.ZNRecord;
 /**
  * Instance (server) partitions for the table.
  *
- * <p>The instance partitions are stored as a map from partition of the format: {@code <partitionId>_<replicaId>} to
- * list of server instances.
+ * <p>The instance partitions is stored as a map from partition of the format: {@code <partitionId>_<replicaId>} to
+ * list of server instances, and is persisted under the ZK path: {@code <cluster>/PROPERTYSTORE/INSTANCE_PARTITIONS}.
+ * <p>The segment assignment will be based on the instance partitions of the table.
  */
 public class InstancePartitions {
   private static final char SPLITTER = '_';
